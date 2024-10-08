@@ -34,6 +34,7 @@ class CloudwatchMetricsTarget(Target):
     :param hide: controls if given metric is displayed on visualization
     :param datasource: Grafana datasource name
     :param queryMode: queryMode for cloudwatch metric request
+    :param label: used to change the time series legend name using Dynamic labels.
     """
 
     alias = attr.ib(default="")
@@ -53,6 +54,7 @@ class CloudwatchMetricsTarget(Target):
     hide = attr.ib(default=False, validator=instance_of(bool))
     datasource = attr.ib(default=None)
     queryMode = attr.ib(default="")
+    label = attr.ib(default="")
 
     def to_json_data(self):
         return {

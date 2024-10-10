@@ -2783,6 +2783,8 @@ class Stat(Panel):
     :param colorMode: defines if Grafana will color panel background: keys "value" "background"
     :param decimals: number of decimals to display
     :param format: defines value units
+    :param showPercentChange: Set whether percent change is displayed or not Defaults to false
+    :param wideLayout: Set whether wide layout is enabled or not. Defaults to true
     :param graphMode: defines if Grafana will draw graph: keys 'area' 'none'
     :param noValue: define the default value if no value is found
     :param mappings: the list of values to text mappings
@@ -2797,20 +2799,23 @@ class Stat(Panel):
     :param thresholds: single stat thresholds
     """
 
-    alignment = attr.ib(default='auto')
+    alignment = attr.ib(default='auto', validator=instance_of(str))
     color = attr.ib(default=None)
-    colorMode = attr.ib(default='value')
+    colorMode = attr.ib(default='value', validator=instance_of(str))
     decimals = attr.ib(default=None)
-    format = attr.ib(default='none')
-    graphMode = attr.ib(default='area')
+    format = attr.ib(default='none', validator=instance_of(str))
+    showPercentChange = attr.ib(default=False, validator=instance_of(bool))
+    wideLayout = attr.ib(default=True, validator=instance_of(bool))
+    graphMode = attr.ib(default='area', validator=instance_of(str))
     mappings = attr.ib(default=attr.Factory(list))
-    noValue = attr.ib(default='none')
-    orientation = attr.ib(default='auto')
+    noValue = attr.ib(default='none', validator=instance_of(str))
+    orientation = attr.ib(default='auto', validator=instance_of(str))
     overrides = attr.ib(default=attr.Factory(list))
     reduceCalc = attr.ib(default='mean', type=str)
     fields = attr.ib(default="")
     textMode = attr.ib(default='auto')
     thresholds = attr.ib(default="")
+
 
     def to_json_data(self):
         return self.panel_json(
@@ -2832,6 +2837,7 @@ class Stat(Panel):
                     'graphMode': self.graphMode,
                     'justifyMode': self.alignment,
                     'orientation': self.orientation,
+                    'wideLayout': self.wideLayout,
                     'reduceOptions': {
                         'calcs': [
                             self.reduceCalc

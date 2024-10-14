@@ -65,6 +65,7 @@ class CloudwatchMetricsTarget(Target):
             "matchExact": self.matchExact,
             "account": self.account,
             "accountId": self.accountId,
+            "label": self.label,
             "metricName": self.metricName,
             "namespace": self.namespace,
             "period": self.period,

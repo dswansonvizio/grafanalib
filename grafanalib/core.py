@@ -2929,8 +2929,8 @@ class StatRangeMappings(object):
     """
 
     text = attr.ib()
-    startValue = attr.ib(default=0, validator=instance_of(int))
-    endValue = attr.ib(default=0, validator=instance_of(int))
+    startValue = attr.ib(default=0, validator=instance_of((int,float)))
+    endValue = attr.ib(default=0, validator=instance_of((int,float)))
     color = attr.ib(default="", validator=instance_of(str))
     index = attr.ib(default=None)
 
